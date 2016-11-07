@@ -12,12 +12,15 @@ module AppStoreScreenshots
       puts VERSION
 
       if ARGV.count == 0
-        cli_put "Usage: #{APP} <id>"
-        puts "         #{APP} <file containing ids>"
+        cli_put "Usage: #{APP} <app store url>"
         exit
       end
 
       id = ARGV[0].sub('id', '')
+      if id.include? 'http'
+        match = id.match /([0-9]*)\?/
+        id = match[0].sub('?', '')
+      end
       cli_put "Getting screenshots for #{id}..."
 
       begin

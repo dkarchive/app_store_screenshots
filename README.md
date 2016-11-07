@@ -4,13 +4,17 @@ Grab screenshots from the App Store.
 
 ## Installation
 
-    $ gem install app_store_screenshots
+    $ git clone https://github.com/dkhamsing/app_store_screenshots.git
     $ rake install
 
 ## Usage
 
 ```
-$ app_store_screenshots id389801252
+app_store_screenshots <app store url>
+```
+
+```
+$ app_store_screenshots https://itunes.apple.com/us/app/instagram/id389801252?mt=8
 app_store_screenshots 0.1.0
 > Getting screenshots for 389801252...
 > Found 5 screenshot(s):
@@ -24,6 +28,8 @@ app_store_screenshots 0.1.0
 > Wrote: screenshots.json
 
 ```
+
+This was pretty handy for [`osia`](https://github.com/dkhamsing/open-source-ios-apps/issues/431).
 
 ## Credits
 

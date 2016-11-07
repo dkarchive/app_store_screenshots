@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = AppStoreScreenshots::SUMMARY
   spec.description   = spec.summary
-  spec.homepage      = 'https://github.com/dkhamsing'
+  spec.homepage      = 'https://github.com/dkhamsing/app_store_screenshots'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
