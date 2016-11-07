@@ -25,6 +25,10 @@ app_store_screenshots 0.1.0
 
 ```
 
+## Credits
+
+- [itunes_store_bot](https://github.com/stefano-bortolotti/itunes_store_bot)
+
 ## Contact
 
 - [github.com/dkhamsing](https://github.com/dkhamsing)
