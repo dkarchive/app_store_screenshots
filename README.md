@@ -15,7 +15,7 @@ app_store_screenshots <app store url>
 
 ```
 $ app_store_screenshots https://itunes.apple.com/us/app/instagram/id389801252?mt=8
-app_store_screenshots 0.1.0
+> app_store_screenshots 0.1.0
 > Getting screenshots for 389801252...
 > Found 5 screenshot(s):
 [
@@ -25,7 +25,7 @@ app_store_screenshots 0.1.0
   "http://a2.mzstatic.com/us/r30/Purple18/v4/da/5f/fb/da5ffb51-349f-5d3b-aa23-1544b4f5d24a/screen696x696.jpeg",
   "http://a3.mzstatic.com/us/r30/Purple18/v4/51/71/e0/5171e09e-81ea-0014-17c5-73c410d20ded/screen696x696.jpeg"
 ]
-> Wrote: screenshots.json
+> Wrote: screenshots-389801252.json
 
 ```
 

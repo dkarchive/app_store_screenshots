@@ -1,15 +1,13 @@
 require "app_store_screenshots/version"
 require "app_store_screenshots/get"
 
-FILENAME = 'screenshots.json'
+FILENAME = 'screenshots'
 
 # Command line interface
 module AppStoreScreenshots
   class << self
     def cli()
-      print APP
-      print ' '
-      puts VERSION
+      cli_put "#{APP} #{VERSION}"
 
       if ARGV.count == 0
         cli_put "Usage: #{APP} <app store url>"
@@ -50,13 +48,15 @@ module AppStoreScreenshots
         s << "\n]"
         puts s
 
+        #TODO: put this in an option
         screenshots.each do |x|
           `open #{x}`
         end
       end
 
-      File.open(FILENAME, 'w') {|f| f.write screenshots.to_json }
-      cli_put "Wrote: #{FILENAME}"
+      fn = "#{FILENAME}-#{id}.json"
+      File.open(fn, 'w') {|f| f.write screenshots.to_json }
+      cli_put "Wrote: #{fn}"
     end
 
     def cli_put(o)
