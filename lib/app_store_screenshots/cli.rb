@@ -17,19 +17,9 @@ module AppStoreScreenshots
       end
 
       input = ARGV[0]
-      id = input.sub('id', '')
-      if id.include? 'http'
-        match = id.match /([0-9]*)\?/
-        if match.nil?
-          cli_put "Error: could not find id in #{id}"
-          exit
-        end
-        id = match[0].sub('?', '')
-      end
-
-      valid = id.to_i
-      unless valid>0
-        cli_put "Error: #{id} is not a valid id"
+      id = cli_id(input)
+      if id.include? 'Error'
+        cli_put id
         exit
       end
 
@@ -84,6 +74,24 @@ module AppStoreScreenshots
 
     def cli_put(o)
       puts "> #{o}"
+    end
+
+    def cli_id(input)
+      id = input.sub('id', '')
+      if id.include? 'http'
+        match = id.match /([0-9]*)\?/
+        if match.nil?
+          return "Error: could not find id in #{id}"
+        end
+        id = match[0].sub('?', '')
+      end
+
+      valid = id.to_i
+      unless valid>0
+        return "Error: #{id} is not a valid id"
+      end
+
+      id
     end
   end
 end
