@@ -9,8 +9,9 @@ Grab screenshots from the App Store.
 
 ## Usage
 
-```
-app_store_screenshots <app store url>
+```shell
+app_store_screenshots <app store url> [--open] 
+                                      # open urls in browser
 ```
 
 ```

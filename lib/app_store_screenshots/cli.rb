@@ -2,6 +2,7 @@ require "app_store_screenshots/version"
 require "app_store_screenshots/get"
 
 FILENAME = 'screenshots'
+OPT_OPEN = 'open'
 
 # Command line interface
 module AppStoreScreenshots
@@ -10,7 +11,7 @@ module AppStoreScreenshots
       cli_put "#{APP} #{VERSION}"
 
       if ARGV.count == 0
-        cli_put "Usage: #{APP} <app store url>"
+        cli_put "Usage: #{APP} <app store url> [--#{OPT_OPEN}]"
         exit
       end
 
@@ -48,9 +49,10 @@ module AppStoreScreenshots
         s << "\n]"
         puts s
 
-        #TODO: put this in an option
-        screenshots.each do |x|
-          `open #{x}`
+        if ARGV.join(' ').include? OPT_OPEN
+          screenshots.each do |x|
+            `open #{x}`
+          end
         end
       end
 
