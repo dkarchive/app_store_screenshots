@@ -50,18 +50,7 @@ module AppStoreScreenshots
       if ARGV.join(' ').include? OPT_SAVE
         cli_put 'Saving screenshots...'
 
-        curl_string = 'curl'
-        screenshots.each_with_index do |x, i|
-          begin
-            ext = x.match(/[^\.]+$/)[0]
-          rescue
-            ext = 'jpeg'
-          end
-
-          curl_string << ' -o'
-          curl_string << " #{id}-#{i}.#{ext} #{x}"
-        end
-
+        curl_string = cli_curl_string screenshots, id
         `#{curl_string}`
       end
 
@@ -74,6 +63,22 @@ module AppStoreScreenshots
 
     def cli_put(o)
       puts "> #{o}"
+    end
+
+    def cli_curl_string(list, id)
+      curl_string = 'curl'
+      list.each_with_index do |x, i|
+        begin
+          ext = x.match(/[^\.]+$/)[0]
+        rescue
+          ext = 'jpeg'
+        end
+
+        curl_string << ' -o'
+        curl_string << " #{id}-#{i}.#{ext} #{x}"
+      end
+
+      curl_string
     end
 
     def cli_id(input)
