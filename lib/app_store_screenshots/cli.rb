@@ -16,11 +16,23 @@ module AppStoreScreenshots
         exit
       end
 
-      id = ARGV[0].sub('id', '')
+      input = ARGV[0]
+      id = input.sub('id', '')
       if id.include? 'http'
         match = id.match /([0-9]*)\?/
+        if match.nil?
+          cli_put "Error: could not find id in #{id}"
+          exit
+        end
         id = match[0].sub('?', '')
       end
+
+      valid = id.to_i
+      unless valid>0
+        cli_put "Error: #{id} is not a valid id"
+        exit
+      end
+
       cli_put "Getting screenshots for #{id}..."
 
       begin
