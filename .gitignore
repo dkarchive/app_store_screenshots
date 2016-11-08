@@ -1,8 +1,4 @@
-
-lib/.DS_Store
-
-*.json
-
+.DS_Store
 *.jpeg
-
-bin/.DS_Store
+*.json
+*.gem
