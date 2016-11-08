@@ -5,7 +5,7 @@ FILEBASE = 'screenshots'
 OPT_OPEN = 'open'
 OPT_SAVE = 'save'
 
-# Command line interface
+# Command line interface.
 module AppStoreScreenshots
   class << self
     def cli()
@@ -36,7 +36,7 @@ module AppStoreScreenshots
         end
       rescue
         a = AppStoreBot.new(id)
-        screenshots = a.get_app_data['screenshots']
+        screenshots = a.get_screenshots
 
         list = []
         screenshots.each do |x|

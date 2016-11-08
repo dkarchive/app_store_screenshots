@@ -4,6 +4,7 @@ require 'openssl'
 
 require 'awesome_print'
 
+# Get app store screenshots.
 class AppStoreBot
   def initialize(app_id, app_country='us')
     @app_id = app_id
@@ -21,35 +22,13 @@ class AppStoreBot
     @app_data
   end
 
-  def update_app_data
-    get_app_info
-    @app_data
-  end
+  # def update_app_data
+  #   get_app_info
+  #   @app_data
+  # end
 
-  def get_app_rating
-    @app_data['all_versions'][:ratingAverage]
-  end
-
-  def get_app_voters_count
-    @app_data['all_versions'][:ratingCount]
-  end
-
-  def get_last_app_rating
-    @app_data['last_version'][:ratingAverage]
-  end
-
-  def get_last_app_voters_count
-    @app_data['last_version'][:ratingCount]
-  end
-
-  def get_last_version_reviews(sort_type='4') # 1: , 2: , 3: , 4: most recent
-    get_reviews('last_version', sort_type)
-    @app_data['last_version'][:reviews]
-  end
-
-  def get_all_versions_reviews(sort_type='4') # 1: , 2: , 3: , 4: most recent
-    get_reviews('all_versions', sort_type)
-    @app_data['all_versions'][:reviews]
+  def get_screenshots
+    @app_data['screenshots']
   end
 
   private
