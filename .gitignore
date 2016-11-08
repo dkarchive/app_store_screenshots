@@ -4,3 +4,5 @@ lib/.DS_Store
 *.json
 
 *.jpeg
+
+bin/.DS_Store
