@@ -83,7 +83,7 @@ module AppStoreScreenshots
 
     def cli_id(input)
       id = input.sub('id', '')
-      if id.include? 'http'
+      if id.include?('http') || id.include?('?')
         match = id.match /([0-9]*)\?/
         if match.nil?
           return "Error: could not find id in #{id}"
