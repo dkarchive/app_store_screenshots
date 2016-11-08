@@ -2,8 +2,6 @@ require 'json'
 require 'net/http'
 require 'openssl'
 
-require 'awesome_print'
-
 # Get app store screenshots.
 module AppStoreScreenshots
   class Get
@@ -44,23 +42,28 @@ module AppStoreScreenshots
     end
 
     def extract_app_data_from_raw_json(data)
+      require 'awesome_print'
       list = data.split 'url'
 
       a4 = []
+
+      # look for screenshots with large size
       list.each do |x|
         if a4.count<5
           a4.push x.match('http.*jpeg')[0] if x.include?('mzstatic') && x.include?('696x')
         end
       end
 
+      # look for any screenshots
       if a4.count==0
-        ap list
         list.each do |x|
           if a4.count<5
             a4.push x.match('http.*jpeg')[0] if x.include?('mzstatic')
           end
         end
       end
+
+      ap list if a4.count==0
 
       a4
     end
