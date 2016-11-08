@@ -35,57 +35,44 @@ module AppStoreScreenshots
 
       cli_put "Getting screenshots for #{id}..."
 
-      begin
-        c = File.read id
-        list = JSON.parse c
+      g = Get.new(id)
+      screenshots = g.screenshots
 
-        screenshots = {}
-        list.each_with_index do |app_id, i|
-          cli_put "#{i+1}/#{list.count}. getting screenshots for #{app_id}"
-          a = AppStoreBot.new(app_id)
-          screenshots[app_id]=a.get_app_data['screenshots']
-          sleep 1
-        end
-      rescue
-        a = AppStoreBot.new(id)
-        screenshots = a.get_screenshots
+      list = []
+      screenshots.each do |x|
+        list.push "  \"#{x}\""
+      end
 
-        list = []
+      cli_put "Found #{screenshots.count} screenshot(s):"
+
+      s = "[ \n"
+      s << list.join(", \n")
+      s << "\n]"
+      puts s
+
+      if ARGV.join(' ').include? OPT_OPEN
+        cli_put 'Opening screenshots in browser...'
         screenshots.each do |x|
-          list.push "  \"#{x}\""
+          `open #{x}`
         end
+      end
 
-        cli_put "Found #{screenshots.count} screenshot(s):"
+      if ARGV.join(' ').include? OPT_SAVE
+        cli_put 'Saving screenshots...'
 
-        s = "[ \n"
-        s << list.join(", \n")
-        s << "\n]"
-        puts s
-
-        if ARGV.join(' ').include? OPT_OPEN
-          cli_put 'Opening screenshots in browser...'
-          screenshots.each do |x|
-            `open #{x}`
-          end
-        end
-
-        if ARGV.join(' ').include? OPT_SAVE
-          cli_put 'Saving screenshots...'
-
-          curl_string = 'curl'
-          screenshots.each_with_index do |x, i|
-            begin
-              ext = x.match(/[^\.]+$/)[0]
-            rescue
-              ext = 'jpeg'
-            end
-
-            curl_string << ' -o'
-            curl_string << " #{id}-#{i}.#{ext} #{x}"
+        curl_string = 'curl'
+        screenshots.each_with_index do |x, i|
+          begin
+            ext = x.match(/[^\.]+$/)[0]
+          rescue
+            ext = 'jpeg'
           end
 
-          `#{curl_string}`
+          curl_string << ' -o'
+          curl_string << " #{id}-#{i}.#{ext} #{x}"
         end
+
+        `#{curl_string}`
       end
 
       fn = "#{FILEBASE}-#{id}.json"
