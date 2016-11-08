@@ -2,6 +2,8 @@
 
 Grab screenshots from the App Store.
 
+[![CircleCI](https://img.shields.io/circleci/project/github/dkhamsing/app_store_screenshots.svg)]()
+ 
 ## Installation
 
     $ git clone https://github.com/dkhamsing/app_store_screenshots.git
