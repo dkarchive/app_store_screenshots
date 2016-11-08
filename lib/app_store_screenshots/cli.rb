@@ -71,10 +71,16 @@ module AppStoreScreenshots
 
         if ARGV.join(' ').include? OPT_SAVE
           cli_put 'Saving screenshots...'
+
+          temp = ' -o'
+          curl_string = 'curl'
           screenshots.each_with_index do |x, i|
             ext = 'jpeg'
-            `curl -o #{id}-#{i}.#{ext} #{x}`
+            curl_string << temp
+            curl_string << " #{id}-#{i}.#{ext} #{x}"
           end
+
+          `#{curl_string}`
         end
       end
 
