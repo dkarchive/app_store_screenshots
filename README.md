@@ -12,7 +12,7 @@ Grab screenshots from the App Store.
 ```shell
 app_store_screenshots <app store url> [--open] [--save]
   # open screenshots in browser
-  # save screenshots 
+  # save screenshots
 ```
 
 ```
@@ -27,8 +27,6 @@ $ app_store_screenshots https://itunes.apple.com/us/app/instagram/id389801252?mt
   "http://a2.mzstatic.com/us/r30/Purple18/v4/da/5f/fb/da5ffb51-349f-5d3b-aa23-1544b4f5d24a/screen696x696.jpeg",
   "http://a3.mzstatic.com/us/r30/Purple18/v4/51/71/e0/5171e09e-81ea-0014-17c5-73c410d20ded/screen696x696.jpeg"
 ]
-> Wrote: screenshots-389801252.json
-
 ```
 
 This was pretty handy for [`osia`](https://github.com/dkhamsing/open-source-ios-apps/issues/431).
