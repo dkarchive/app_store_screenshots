@@ -1,8 +1,9 @@
 require "app_store_screenshots/version"
 require "app_store_screenshots/get"
 
-FILENAME = 'screenshots'
+FILEBASE = 'screenshots'
 OPT_OPEN = 'open'
+OPT_SAVE = 'save'
 
 # Command line interface
 module AppStoreScreenshots
@@ -11,7 +12,7 @@ module AppStoreScreenshots
       cli_put "#{APP} #{VERSION}"
 
       if ARGV.count == 0
-        cli_put "Usage: #{APP} <app store url> [--#{OPT_OPEN}]"
+        cli_put "Usage: #{APP} <app store url> [--#{OPT_OPEN}] [--#{OPT_SAVE}]"
         exit
       end
 
@@ -50,15 +51,26 @@ module AppStoreScreenshots
         puts s
 
         if ARGV.join(' ').include? OPT_OPEN
+          cli_put 'Opening screenshots in browser...'
           screenshots.each do |x|
             `open #{x}`
           end
         end
+
+        if ARGV.join(' ').include? OPT_SAVE
+          cli_put 'Saving screenshots...'
+          screenshots.each_with_index do |x, i|
+            ext = 'jpeg'
+            `curl -o #{id}-#{i}.#{ext} #{x}`
+          end
+        end
       end
 
-      fn = "#{FILENAME}-#{id}.json"
+      fn = "#{FILEBASE}-#{id}.json"
       File.open(fn, 'w') {|f| f.write screenshots.to_json }
-      cli_put "Wrote: #{fn}"
+      # cli_put "Wrote: #{fn}"
+
+      fn
     end
 
     def cli_put(o)
