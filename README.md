@@ -13,8 +13,8 @@ Grab screenshots from the App Store.
 
 ```shell
 app_store_screenshots <app store url> [--open] [--save]
-  # open screenshots in browser
-  # save screenshots
+  # --open  open screenshots in browser
+  # --save  save screenshots
 ```
 
 ```

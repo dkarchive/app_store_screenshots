@@ -25,8 +25,6 @@ module AppStoreScreenshots
       cli_put "Getting screenshots for #{id}..."
 
       g = Get.new(id)
-      screenshots = g.screenshots
-
       if g.error
         r = g.response
 
@@ -37,6 +35,7 @@ module AppStoreScreenshots
         exit
       end
 
+      screenshots = g.screenshots
       cli_put "Found #{screenshots.count} screenshot(s):"
 
       list = []
