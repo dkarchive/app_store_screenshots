@@ -16,8 +16,7 @@ module AppStoreScreenshots
         exit
       end
 
-      input = ARGV[0]
-      id = cli_id(input)
+      id = cli_id(ARGV[0])
       if id.include? 'Error'
         cli_put id
         exit
@@ -28,12 +27,22 @@ module AppStoreScreenshots
       g = Get.new(id)
       screenshots = g.screenshots
 
+      if g.error
+        r = g.response
+
+        fn = "#{FILEBASE}-#{id}.error"
+        File.open(fn, 'w') {|f| f.write r }
+
+        cli_put "Error: no screenshots found, wrote #{fn}"
+        exit
+      end
+
+      cli_put "Found #{screenshots.count} screenshot(s):"
+
       list = []
       screenshots.each do |x|
         list.push "  \"#{x}\""
       end
-
-      cli_put "Found #{screenshots.count} screenshot(s):"
 
       s = "[ \n"
       s << list.join(", \n")

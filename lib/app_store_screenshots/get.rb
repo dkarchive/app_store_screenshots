@@ -16,8 +16,20 @@ module AppStoreScreenshots
       get_app_info
     end
 
+    def error
+      @app_data['screenshots'].count==0
+    end
+
+    def response
+      @app_data['response']
+    end
+
     def screenshots
       @app_data['screenshots']
+    end
+
+    def urls
+      @app_data['urls']
     end
 
     private
@@ -34,6 +46,8 @@ module AppStoreScreenshots
       if response.code != '200'
         puts "App Store store website communication (status-code: #{response.code})\n#{response.body}"
       else
+        @app_data['response'] = response.body
+
         data = extract_app_data_from_raw_json( response.body )
         @app_data['screenshots'] = data
       end
@@ -44,26 +58,27 @@ module AppStoreScreenshots
     def extract_app_data_from_raw_json(data)
       list = data.split 'url'
 
-      a4 = []
+      shots = []
 
       # look for screenshots with large size
       list.each do |x|
-        if a4.count<5
-          a4.push x.match('http.*jpeg')[0] if x.include?('mzstatic') && x.include?('696x')
+        if shots.count<5
+          shots.push x.match('http.*jpeg')[0] if x.include?('mzstatic') && x.include?('696x')
         end
       end
 
       # look for any screenshots
-      if a4.count==0
+      if shots.count==0
         list.each do |x|
-          if a4.count<5
-            a4.push x.match('http.*jpeg')[0] if x.include?('mzstatic')
+          if shots.count<5
+            shots.push x.match('http.*jpeg')[0] if x.include?('mzstatic')
           end
         end
       end
 
+      @app_data['urls'] = list if shots.count == 0
 
-      a4
+      shots
     end
   end
 end
