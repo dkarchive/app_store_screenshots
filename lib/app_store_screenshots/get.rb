@@ -42,7 +42,6 @@ module AppStoreScreenshots
     end
 
     def extract_app_data_from_raw_json(data)
-      require 'awesome_print'
       list = data.split 'url'
 
       a4 = []
@@ -63,7 +62,6 @@ module AppStoreScreenshots
         end
       end
 
-      ap list if a4.count==0
 
       a4
     end
