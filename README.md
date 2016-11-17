@@ -7,6 +7,7 @@ Grab screenshots from the App Store.
 ## Installation
 
     $ git clone https://github.com/dkhamsing/app_store_screenshots.git
+    $ cd app_store_screenshots
     $ rake install
 
 ## Usage
